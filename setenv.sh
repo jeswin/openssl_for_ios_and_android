@@ -1,0 +1,1 @@
+export ANDROID_NDK=/home/jeswin/Android/Sdk/ndk/21.0.6113669/

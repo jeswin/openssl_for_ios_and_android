@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright 2019 leenjewel
 # 
@@ -18,9 +18,9 @@
 
 set -u
 
-OPENSSL_VERSION=1.1.1a
+OPENSSL_VERSION=1.1.1f
 
-API_LEVEL=16
+API_LEVEL=28
 
 SOURCE="$0"
 while [ -h "$SOURCE" ]; do
@@ -42,7 +42,8 @@ esac
 BUILD_DIR=$PWDPATH/../output/openssl_111_android_build
 OUT_DIR=$PWDPATH/../output/openssl_111_android
 
-BUILD_TARGETS="armeabi armeabi-v7a arm64-v8a x86 x86_64"
+BUILD_TARGETS="x86_64"
+# BUILD_TARGETS="armeabi armeabi-v7a arm64-v8a x86 x86_64"
 
 if [ ! -d openssl-${OPENSSL_VERSION} ]
 then
@@ -72,9 +73,12 @@ build_the_thing() {
 echo $PATH
     make clean
     #./Configure $SSL_TARGET $OPTIONS -fuse-ld="$TOOLCHAIN/$TRIBLE/bin/ld" "-gcc-toolchain $TOOLCHAIN" && \
+    # ./Configure $SSL_TARGET $OPTIONS -fuse-ld="$TOOLCHAIN/$TRIBLE/bin/ld" zlib \
+    #           no-asm \
+    #           no-shared \
+    #           no-unit-test && \
     ./Configure $SSL_TARGET $OPTIONS -fuse-ld="$TOOLCHAIN/$TRIBLE/bin/ld" zlib \
               no-asm \
-              no-shared \
               no-unit-test && \
     make && \
     make install DESTDIR=$DESTDIR || exit 128

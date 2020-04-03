@@ -10,3 +10,5 @@ tools/openssl*
 tools/protobuf*
 output/
 .xcuserstate
+
+.vscode
